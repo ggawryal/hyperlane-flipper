@@ -1,66 +1,21 @@
-## Foundry
+# Running
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+1. `source .env`
 
-Foundry consists of:
+1. (Optionally - otherwise predeployed Counter address will be used) deploy the Counter contract on Sepolia: `./deploy.sh <ACCOUNT>`. For this you will need an `ACCOUNT` in `cast` keystore, with some sETH. 
+After deploying, execute `export COUNTER_SEPOLIA_ADDRESS=...` - the deployed address will be printed by the script.
+ 
+2. Send message to Alfajores Mailbox:
+`./send.sh <NUMBER> <ACCOUNT>`
+This will relay the message to Sepolia's mailbox, then pass it to the Counter, which will be set to the given number.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+# Building
 
-## Documentation
+`forge build`
 
-https://book.getfoundry.sh/
+# Deploying contracts
 
-## Usage
+First, we have to deploy either 
 
-### Build
+## Already deployed Mailbox on Aleph EVM Testnet
 
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
