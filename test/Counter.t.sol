@@ -12,7 +12,7 @@ contract CounterTest is Test {
     function setUp() public {
         counter = new Counter(TEST_ACCOUNT, 1);
     }
-    
+
     function testFuzz_SetNumber(uint256 x) public {
         counter.setNumber(x);
         assertEq(counter.number(), x);

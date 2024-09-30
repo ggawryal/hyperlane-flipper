@@ -7,7 +7,6 @@ error Unauthorized();
 
 event Set(bytes32 indexed sender, uint256 oldValue, uint256 newValue);
 
-
 contract Counter {
     uint256 public number;
     address public immutable owner;

@@ -11,7 +11,7 @@ contract CounterScript is Script {
         require(vm.envUint("ALFAJORES_DOMAIN") <= type(uint32).max, "Domain must be an uint32");
         uint32 originChainDomain = uint32(vm.envUint("ALFAJORES_DOMAIN"));
         address mailbox = vm.envAddress("SEPOLIA_MAILBOX");
-        
+
         vm.startBroadcast();
 
         counter = new Counter(mailbox, originChainDomain);
