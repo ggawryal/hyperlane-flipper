@@ -40,7 +40,7 @@ contract Counter {
         number = newNumber;
     }
 
-    function isAllowedOrigin(uint32 origin) public view returns(bool) {
+    function isAllowedOrigin(uint32 origin) public view returns (bool) {
         for (uint256 i = 0; i < allowedOriginDomains.length; i++) {
             if (allowedOriginDomains[i] == origin) {
                 return true;
@@ -48,7 +48,6 @@ contract Counter {
         }
         return false;
     }
-
 
     modifier onlyMailbox() {
         require(msg.sender == mailbox, "Counter: sender not mailbox");
