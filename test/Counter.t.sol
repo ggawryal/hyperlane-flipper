@@ -10,12 +10,8 @@ contract CounterTest is Test {
     address constant TEST_ACCOUNT = 0x1234567890AbcdEF1234567890aBcdef12345678;
 
     function setUp() public {
-        counter = new Counter(TEST_ACCOUNT, 1);
-    }
-
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+        counter = new Counter(TEST_ACCOUNT);
+        counter.addAllowedOriginDomain(1);
     }
 
     function testFuzz_handle_from_mailbox(uint256 x) public {
@@ -34,5 +30,15 @@ contract CounterTest is Test {
         vm.prank(TEST_ACCOUNT);
         vm.expectRevert("Incorrect origin chain domain");
         counter.handle(5, 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef, abi.encode(uint256(54)));
+    }
+
+    function test_add_remove_allowed_origins() public {
+        counter.addAllowedOriginDomain(2);
+        counter.addAllowedOriginDomain(3);
+        counter.addAllowedOriginDomain(4);
+        counter.removeAllowedOriginDomain(3);
+        assertEq(counter.isAllowedOrigin(2), true);
+        assertEq(counter.isAllowedOrigin(3), false);
+        assertEq(counter.isAllowedOrigin(4), true);
     }
 }
